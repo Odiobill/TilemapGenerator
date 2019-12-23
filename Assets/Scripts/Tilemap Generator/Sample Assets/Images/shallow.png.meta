@@ -1,0 +1,691 @@
+fileFormatVersion: 2
+guid: 81caad11d8711b9409c1ab1b26e059a7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6793242971735332770
+    second: shallow_0
+  - first:
+      213: 8414865431510937832
+    second: shallow_1
+  - first:
+      213: -8851607609804439689
+    second: shallow_2
+  - first:
+      213: -2714015179008344607
+    second: shallow_3
+  - first:
+      213: -534426360122536012
+    second: shallow_4
+  - first:
+      213: 1906323417542912736
+    second: shallow_5
+  - first:
+      213: -1317329102289429754
+    second: shallow_6
+  - first:
+      213: -967477169000492917
+    second: shallow_7
+  - first:
+      213: 3391823989598030352
+    second: shallow_8
+  - first:
+      213: -4758167635850899983
+    second: shallow_9
+  - first:
+      213: -5900421413499010306
+    second: shallow_10
+  - first:
+      213: 2229229985561262951
+    second: shallow_11
+  - first:
+      213: -2524629040452901335
+    second: shallow_12
+  - first:
+      213: 6814663714726293969
+    second: shallow_13
+  - first:
+      213: 8308913729877101135
+    second: shallow_14
+  - first:
+      213: 3155872209303029990
+    second: shallow_15
+  - first:
+      213: 4463755716571484768
+    second: shallow_16
+  - first:
+      213: -277886244983279813
+    second: shallow_17
+  - first:
+      213: -299071142097238161
+    second: shallow_18
+  - first:
+      213: -397888928993329767
+    second: shallow_19
+  - first:
+      213: 1087717847106415315
+    second: shallow_20
+  - first:
+      213: 9008383389339687053
+    second: shallow_21
+  - first:
+      213: -5524249425203972697
+    second: shallow_22
+  - first:
+      213: -6817425407923401861
+    second: shallow_23
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 213
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: shallow_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1101
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d30d110d2e142742b3abd103743b73c
+      internalID: 6793242971735332770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_1
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 1101
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc123a37249c3cd4f8d30a6909ddd25c
+      internalID: 8414865431510937832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_2
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1101
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90eaae6df6d8a5049a7a0ddb2ebab3f1
+      internalID: -8851607609804439689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_3
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 1101
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df51a2230189df64fbb3dd5f68aff5e7
+      internalID: -2714015179008344607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 884
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 600b8ffe972abd44c974e789eac65566
+      internalID: -534426360122536012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_5
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 884
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ea0da6e42c99fe4eb359381d7a38e57
+      internalID: 1906323417542912736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_6
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 884
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90d13e6c82b2fcc4ca0f8fac9f4a2a22
+      internalID: -1317329102289429754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_7
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 884
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d5949dc9ed1d747acf6fdf1d882901
+      internalID: -967477169000492917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 667
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9ca960a5daa6384db8413faccc527e8
+      internalID: 3391823989598030352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_9
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 667
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 480f5d4000d5d744c995bec5ecc7a4f7
+      internalID: -4758167635850899983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_10
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 667
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5aea0e2530609641840c27d8f455303
+      internalID: -5900421413499010306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_11
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 667
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed7ca1259bae30d46a52632bb36d3668
+      internalID: 2229229985561262951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_12
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 450
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67936280ed25d2449aa1c18550163fb9
+      internalID: -2524629040452901335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_13
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 450
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae8444f81f0db6a4ca5334ca73224dc5
+      internalID: 6814663714726293969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_14
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 450
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2778a9a7e18bad44bad95810bbd97e3b
+      internalID: 8308913729877101135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_15
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 450
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55a1e5c2862f4964fb3ac9633796fba5
+      internalID: 3155872209303029990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_16
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 233
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67ca0fc502d57dd4abba965dd4a3fbaa
+      internalID: 4463755716571484768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_17
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 233
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2f66734228a5ad49ad2ef14a5a56d4e
+      internalID: -277886244983279813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_18
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 233
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5cbcbbf28d16bb4c8e552d8483c9530
+      internalID: -299071142097238161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_19
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 233
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fed9727f7e87fdb4abca4a5fc016f88b
+      internalID: -397888928993329767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_20
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 16
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 569f8f8135bdf71479365b7076f77d9f
+      internalID: 1087717847106415315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_21
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 16
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3147c26f9989dce408ccdf04d0d74852
+      internalID: 9008383389339687053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_22
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 16
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a91d6e04a313424287916ecd9e471d8
+      internalID: -5524249425203972697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shallow_23
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 16
+        width: 245
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38c5a1adda29bd84682d93e791b34fc6
+      internalID: -6817425407923401861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
