@@ -7,7 +7,7 @@ You are also required to provide a "Weight" for each Rule Tile/layer. The weight
 The generated tilemaps will be created as children of the empty template ones, to avoid messing up with other tilemaps that you may want to use outside the scope of this script.
 
 ## Parameters available from the Inspector:
-- *Rule Tiles8            add a Rule Tile for each layer that you want to create
+- *Rule Tiles*            add a Rule Tile for each layer that you want to create
 - *Weights*               assign a weight to each layer to define how big it should be compared to the other ones.
 - *Width*                 the width of the Map
 - *Height*                the height of the Map
