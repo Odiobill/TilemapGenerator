@@ -23,11 +23,11 @@ using UnityEngine.Tilemaps;
 /// - Island Water Border   if greater than zero, fades the edges of the Map to the first layer and then adds a border of the specified size around the Map
 ///
 /// Usage
-/// - Download and install the required Unity 2d-extras package from "https://github.com/Unity-Technologies/2d-extras".
+/// - Download and install the required Unity 2d-extras package from "https://github.com/Unity-Technologies/2d-extras"
 ///    As specified in the README.md file of that repository, you can just add
 ///    "com.unity.2d.tilemap.extras": "https://github.com/Unity-Technologies/2d-extras.git#master"
 ///    to your Packages/manifest.json file in your Unity Project under the dependencies section
-/// - Create an empty Tilemap, either for traditional or hexagonal tiles, that will be used as a template for the generated ones.
+/// - Create an empty Tilemap, either for traditional or hexagonal tiles, that will be used as a template for the generated ones
 /// - Attach this script to the Grid GameObject containing the template Tilemap
 /// - In the Inspector, assign a Rule Tile for any layer you want in the "Rule Tiles" list
 /// - Define a weight for each layer in the "Weights" list
