@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -50,6 +51,13 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class TilemapGenerator : MonoBehaviour
 {
+    public enum IslandShape
+    {
+        None,
+        Rectangle,
+        Ellipse
+    }
+
     public Tilemap sourceTilemap;
     public RuleTile[] ruleTiles;
     public float[] weights;
@@ -62,6 +70,7 @@ public class TilemapGenerator : MonoBehaviour
     public bool centerMap;
     public bool fadeOutTiles;
     public int islandWaterBorder;
+    public IslandShape islandShape;
     
     TileData[,] _tiles;
     Tilemap[] _tilemaps;
@@ -96,6 +105,20 @@ public class TilemapGenerator : MonoBehaviour
         get
         {
             return sourceTilemap.transform.childCount > 0;
+        }
+    }
+
+    /// <summary>
+    /// Distance from cell World Position to the actual center
+    /// </summary>
+    /// <returns>
+    /// A Vector3 containing the offset to add to the cell position for getting the center of a cell
+    /// </returns>
+    public Vector3 CellOffset
+    {
+        get
+        {
+            return new Vector3(grid.cellSize.x / 2f, grid.cellSize.y / 2f, 0f);
         }
     }
 
@@ -206,6 +229,11 @@ public class TilemapGenerator : MonoBehaviour
             return;
         }
 
+        if (islandShape == IslandShape.Ellipse)
+        {
+            centerMap = true;
+        }
+
         if (grid == null)
         {
             grid = GetComponent<Grid>();
@@ -229,7 +257,7 @@ public class TilemapGenerator : MonoBehaviour
                 {
                     if (Application.isPlaying)
                     {
-                        DestroyImmediate(sourceTilemap.transform.GetChild(i).gameObject);
+                        Destroy(sourceTilemap.transform.GetChild(i).gameObject);
                     }
                     else
                     {
@@ -262,10 +290,14 @@ public class TilemapGenerator : MonoBehaviour
 
         CalculatePerlinNoise();
 
-        bool makeIsland = (islandWaterBorder > 0 && _zLayers > 0 && width > _zLayers * 2 && height > _zLayers * 2);
+        bool makeIsland = (islandShape != IslandShape.None && islandWaterBorder > 0 && _zLayers > 0 && width > _zLayers * 2 && height > _zLayers * 2);
         if (makeIsland)
         {
             MakeIsland();
+            if (islandShape == IslandShape.Ellipse)
+            {
+                MakeIslandEllipse();
+            }
         }
 
         if (!existingTiles)
@@ -282,8 +314,15 @@ public class TilemapGenerator : MonoBehaviour
                 for (int x = 0; x < width; x++)
                 {
                     Vector3Int pos = MapToCell(x, y);
-                    //Vector3Int pos = new Vector3Int(centerMap ? x - width / 2 : x, centerMap ? y - height / 2 : y, 0);
-                    int index = _tiles[x, y].zLayer < _zLayers ? _tiles[x, y].zLayer : _zLayers - 1;
+                    int index;
+                    if (_zLayers == 0)
+                    {
+                        index = 0;
+                    }
+                    else
+                    {
+                        index = _tiles[x, y].zLayer < _zLayers ? _tiles[x, y].zLayer : _zLayers - 1;
+                    }
                     _tilemaps[index].SetTile(pos, ruleTiles[index]);
                 }
             }
@@ -384,76 +423,294 @@ public class TilemapGenerator : MonoBehaviour
         }
     }
 
+    int EllipseX(int y)
+    {
+        float a = (float)width / 2f;
+        float b = (float)height / 2f;
+        float fY = (float)y;
+
+        int x = Mathf.RoundToInt(Mathf.Sqrt((1f - (fY * fY) / (b * b)) * (a * a)));
+        if (width % 2 == 0 && x == width / 2)
+        {
+            x--;
+        }
+
+        return x;
+    }
+
+    void ClampCellLayer(int x, int y, int zLayer, float zAmount)
+    {
+        if (x > -width / 2 && x < width / 2 && y > -height / 2 && y < height / 2)
+        {
+            Vector3Int mapPosition = CellToMap(x, y);
+            if (_tiles[mapPosition.x, mapPosition.y].zLayer > zLayer)
+            {
+                _tiles[mapPosition.x, mapPosition.y].z = zAmount;
+                _tiles[mapPosition.x, mapPosition.y].zLayer = zLayer;
+            }
+        }
+    }
+
+    void FadeCellsFrom(int x, int y, bool up, bool right)
+    {
+        int xCurr = x;
+        int yCurr = y;
+        int zLayer = 0;
+        float zAmount = 0f;
+        while (zLayer < _zLayers)
+        {
+            ClampCellLayer(xCurr, y, zLayer, zAmount);
+            ClampCellLayer(x, yCurr, zLayer, zAmount);
+            ClampCellLayer(xCurr, yCurr, zLayer, zAmount);
+
+            if (up == true && right == true)
+            {
+                xCurr--;
+                yCurr--;
+            }
+            else if (up == true && right == false)
+            {
+                xCurr++;
+                yCurr--;
+            }
+            else if (up == false && right == true)
+            {
+                xCurr--;
+                yCurr++;
+            }
+            else
+            {
+                xCurr++;
+                yCurr++;
+            }
+
+            zLayer++;
+            zAmount += zLayer < weights.Length ? weights[zLayer] : 1f;
+        }
+    }
+
+    void MakeIslandEllipse()
+    {
+        int xPrev = width / 2; // right edge
+
+        for (int y = 0; y < height / 2; y++)
+        {
+            int xPositive = EllipseX(y);
+            int xNegative = -xPositive;
+
+            // add water over the edge of the ellipse for the current tile
+            for (int i = y; i < height / 2; i++)
+            {
+                Vector3Int mapPositionTopRight = CellToMap(xPositive, i);
+                _tiles[mapPositionTopRight.x, mapPositionTopRight.y].z = 0f;
+                _tiles[mapPositionTopRight.x, mapPositionTopRight.y].zLayer = 0;
+
+                Vector3Int mapPositionTopLeft = CellToMap(xNegative, i);
+                _tiles[mapPositionTopLeft.x, mapPositionTopLeft.y].z = 0f;
+                _tiles[mapPositionTopLeft.x, mapPositionTopLeft.y].zLayer = 0;
+
+                Vector3Int mapPositionBottomRight = CellToMap(xPositive, -i);
+                _tiles[mapPositionBottomRight.x, mapPositionBottomRight.y].z = 0f;
+                _tiles[mapPositionBottomRight.x, mapPositionBottomRight.y].zLayer = 0;
+
+                Vector3Int mapPositionBottomLeft = CellToMap(xNegative, -i);
+                _tiles[mapPositionBottomLeft.x, mapPositionBottomLeft.y].z = 0f;
+                _tiles[mapPositionBottomLeft.x, mapPositionBottomLeft.y].zLayer = 0;
+            }
+            FadeCellsFrom(xPositive, y, true, true);
+            FadeCellsFrom(xNegative, y, true, false);
+            FadeCellsFrom(xPositive, -y, false, true);
+            FadeCellsFrom(xNegative, -y, false, false);
+
+            // check for missing tiles (right side)
+            if (xPositive < xPrev - 1)
+            {
+                // make up for the missing tiles on the right
+                for (int i = xPrev - 1; i > xPositive; i--)
+                {
+                    // draw water over the edge of the ellipse for the missing tiles
+                    for (int j = y; j < height / 2; j++)
+                    {
+                        Vector3Int mapPositionTopRight = CellToMap(i, j);
+                        _tiles[mapPositionTopRight.x, mapPositionTopRight.y].z = 0f;
+                        _tiles[mapPositionTopRight.x, mapPositionTopRight.y].zLayer = 0;
+
+                        Vector3Int mapPositionTopLeft = CellToMap(-i, j);
+                        _tiles[mapPositionTopLeft.x, mapPositionTopLeft.y].z = 0f;
+                        _tiles[mapPositionTopLeft.x, mapPositionTopLeft.y].zLayer = 0;
+
+                        Vector3Int mapPositionBottomRight = CellToMap(i, -j);
+                        _tiles[mapPositionBottomRight.x, mapPositionBottomRight.y].z = 0f;
+                        _tiles[mapPositionBottomRight.x, mapPositionBottomRight.y].zLayer = 0;
+
+                        Vector3Int mapPositionBottomLeft = CellToMap(-i, -j);
+                        _tiles[mapPositionBottomLeft.x, mapPositionBottomLeft.y].z = 0f;
+                        _tiles[mapPositionBottomLeft.x, mapPositionBottomLeft.y].zLayer = 0;
+                    }
+                    FadeCellsFrom(i, y, true, true);
+                    FadeCellsFrom(-i, y, true, false);
+                    FadeCellsFrom(i, -y, false, true);
+                    FadeCellsFrom(-i, -y, false, false);
+                }
+            }
+            xPrev = xPositive;
+
+        }
+
+        // draw water tiles for the top and bottom edge of the ellipse
+        for (int i = xPrev - 1; i >= 0; i--)
+        {
+            Vector3Int mapPositionTopRight = CellToMap(i, height / 2 - 1);
+            _tiles[mapPositionTopRight.x, mapPositionTopRight.y].z = 0f;
+            _tiles[mapPositionTopRight.x, mapPositionTopRight.y].zLayer = 0;
+
+            Vector3Int mapPosition = CellToMap(-i, height / 2 - 1);
+            _tiles[mapPosition.x, mapPosition.y].z = 0f;
+            _tiles[mapPosition.x, mapPosition.y].zLayer = 0;
+        }
+    }
+
+
+//     void MakeIsland(bool ellipse)
+//     {
+//         int xPrev = width / 2; // right edge
+//         // // draw water over the right edge of the ellipse
+//         for (int i = 0; i < height / 2; i++)
+//         {
+//             _tmpTilemap.SetTile(new Vector3Int(xPrev, i, 0), ruleTiles[0]);
+//         }
+//         // _tmpTilemap.SetTile(new Vector3Int(-xPrev, 0, 0), ruleTiles[0]);
+
+//         float a = (float)width / 2f;
+//         float b = (float)height / 2f;
+
+//         for (int y = 1; y < height / 2; y++)
+//         {
+//             float fY = (float)y;
+//             float fX = Mathf.Sqrt((1f - (fY * fY) / (b * b)) * (a * a));
+
+//             int x = Mathf.RoundToInt(fX);
+//             if (x < xPrev - 1)
+//             {
+//                 // make up for the missing tiles on the right
+//                 for (int i = xPrev - 1; i > x; i--)
+//                 {
+//                     // draw water over the edge of the ellipse for the missing tiles
+//                     for (int j = y; j < height / 2; j++)
+//                     {
+//                         _tmpTilemap.SetTile(new Vector3Int(i, j, 0), ruleTiles[0]);
+//                     }
+//                     // draw the missing tile
+//                     // _tmpTilemap.SetTile(new Vector3Int(i, y, 0), ruleTiles[0]);
+//                     // _tmpTilemap.SetTile(new Vector3Int(i, -y, 0), ruleTiles[0]);
+//                     // _tmpTilemap.SetTile(new Vector3Int(-i, y, 0), ruleTiles[0]);
+//                     // _tmpTilemap.SetTile(new Vector3Int(-i, -y, 0), ruleTiles[0]);
+//                 }
+//             }
+//             xPrev = x;
+
+// /// CACCA
+//             // draw water over the edge of the ellipse for the current tile
+//             for (int i = y; i < height / 2; i++)
+//             {
+//                 _tmpTilemap.SetTile(new Vector3Int(x, i, 0), ruleTiles[0]);
+//             }
+//             // _tmpTilemap.SetTile(new Vector3Int(x, -y, 0), ruleTiles[0]);
+//             // _tmpTilemap.SetTile(new Vector3Int(-x, y, 0), ruleTiles[0]);
+//             // _tmpTilemap.SetTile(new Vector3Int(-x, -y, 0), ruleTiles[0]);
+
+//             int zLayer = 0;
+//             int curr = x;
+//             while (zLayer < _zLayers)
+//             {
+//                 _tmpTilemap.SetTile(new Vector3Int(curr, y, 0), ruleTiles[zLayer]);
+//                 curr--;
+//                 zLayer++;
+//             }
+
+//         }
+
+//         // draw water tiles for the top edge of the ellipse
+//         for (int j = xPrev - 1; j >= 0; j--)
+//         {
+//             _tmpTilemap.SetTile(new Vector3Int(j, height / 2 - 1, 0), ruleTiles[0]);
+//             // _tmpTilemap.SetTile(new Vector3Int(i, -height / 2, 0), ruleTiles[0]);
+//             // _tmpTilemap.SetTile(new Vector3Int(-i, height / 2, 0), ruleTiles[0]);
+//             // _tmpTilemap.SetTile(new Vector3Int(-i, -height / 2, 0), ruleTiles[0]);
+//         }
+
+//     }
+
     void MakeIsland()
     {
-        float amount;
+        float zAmount;
         int zLayer;
 
         // top side
-        amount = 0f;
+        zAmount = 0f;
         zLayer = 0;
         for (int y = height - 1; y > height - _zLayers - 2; y--)
         {
             for (int x = 0; x < width; x++)
             {
-                if (_tiles[x, y].z * _totalWeight > amount)
+                if (_tiles[x, y].z * _totalWeight > zAmount)
                 {
-                    _tiles[x, y].z = amount / _totalWeight;
+                    _tiles[x, y].z = zAmount / _totalWeight;
                     _tiles[x, y].zLayer = zLayer;
                 }
             }
-            amount += zLayer < weights.Length ? weights[zLayer] : 1f;
+            zAmount += zLayer < weights.Length ? weights[zLayer] : 1f;
             zLayer++;
         }
 
         // right side
-        amount = 0f;
+        zAmount = 0f;
         zLayer = 0;
         for (int x = width - 1; x > width - _zLayers - 2; x--)
         {
             for (int y = 0; y < height; y++)
             {
-                if (_tiles[x, y].z * _totalWeight > amount)
+                if (_tiles[x, y].z * _totalWeight > zAmount)
                 {
-                    _tiles[x, y].z = amount / _totalWeight;
+                    _tiles[x, y].z = zAmount / _totalWeight;
                     _tiles[x, y].zLayer = zLayer;
                 }
             }
-            amount += zLayer < weights.Length ? weights[zLayer] : 1f;
+            zAmount += zLayer < weights.Length ? weights[zLayer] : 1f;
             zLayer++;
         }
 
         // bottom side
-        amount = 0f;
+        zAmount = 0f;
         zLayer = 0;
         for (int y = 0; y < _zLayers - 1; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                if (_tiles[x, y].z * _totalWeight > amount)
+                if (_tiles[x, y].z * _totalWeight > zAmount)
                 {
-                    _tiles[x, y].z = amount / _totalWeight;
+                    _tiles[x, y].z = zAmount / _totalWeight;
                     _tiles[x, y].zLayer = zLayer;
                 }
             }
-            amount += zLayer < weights.Length ? weights[zLayer] : 1f;
+            zAmount += zLayer < weights.Length ? weights[zLayer] : 1f;
             zLayer++;
         }
 
         // left side
-        amount = 0f;
+        zAmount = 0f;
         zLayer = 0;
         for (int x = 0; x < _zLayers - 1; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                if (_tiles[x, y].z * _totalWeight > amount)
+                if (_tiles[x, y].z * _totalWeight > zAmount)
                 {
-                    _tiles[x, y].z = amount / _totalWeight;
+                    _tiles[x, y].z = zAmount / _totalWeight;
                     _tiles[x, y].zLayer = zLayer;
                 }
             }
-            amount += zLayer < weights.Length ? weights[zLayer] : 1f;
+            zAmount += zLayer < weights.Length ? weights[zLayer] : 1f;
             zLayer++;
         }
 
@@ -529,7 +786,7 @@ public class TilemapGenerator : MonoBehaviour
                 }
 
                 // down-left
-                if ((x > 0) && (y > 0) && (_tiles[x - 1, y -1 ].zLayer == index - 1))
+                if ((x > 0) && (y > 0) && (_tiles[x - 1, y - 1].zLayer == index - 1))
                 {
                     _tilemaps[index].SetTile(new Vector3Int(pos.x - 1, pos.y - 1, pos.z), ruleTiles[index]);
                 }
